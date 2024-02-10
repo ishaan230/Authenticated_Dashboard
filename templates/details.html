@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team Details</title>
+    <style>
+        body {
+            background-image: url('/static/teamback.jpg');
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <form method="POST" action="/form_submit">
+        <div>
+            <label for="name1" style="color:cornsilk"><i><b>Member 1</i></b></label>
+            <input type="text" name="name1" id="name1" required>
+
+            <label for="name2" style="color:cornsilk"><i><b>Member 2</i></b></label>
+            <input type="text" name="name2" id="name2" required>
+
+            <label for="name3" style="color:cornsilk"><i><b>Member 3</i></b></label>
+            <input type="text" name="name3" id="name3" required>
+
+            <label for="name4" style="color:cornsilk"><i><b>Member 4</i></b></label>
+            <input type="text" name="name4" id="name4" required>
+
+            <button id="submitbutton" type="submit">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

@@ -4,16 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        a .hidden {
-        visibility: hidden;
-        }
-
-        a:visited .hidden {
-        visibility: visible;
-        }
+        /* ... Your existing styles ... */
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
             background-color: #f2f2f2;
@@ -24,7 +18,7 @@
             color: white;
             padding: 1em;
             text-align: center;
-            font-size: 1.5em;
+            font-size: 2em;
         }
 
         section {
@@ -34,12 +28,48 @@
         }
 
         .card {
-            background-color: white;
+            background-color: #fff;
             border-radius: 8px;
             padding: 1.5em;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             flex: 1;
             margin: 0 1em;
+        }
+
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #333;
+            padding-bottom: 0.5em;
+            margin-bottom: 1em;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 1em;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        button {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
         }
 
         footer {
@@ -51,31 +81,21 @@
             bottom: 0;
             width: 100%;
         }
-        #username{
-          padding-left: 5%;
+        #headbut{
+            margin-left: 90%;
+            text-decoration: none;
+            font-weight: bold;
+            color: white;
+            background-color: #28a745;            
         }
-        #content {
-  display: none;
-}
-input[type="text"]{
-    color: transparent;
-    text-shadow: 0 0 0 #000;
-    padding: 6px 12px;
-    width: 150px;
-    cursor: pointer;
-}
-input[type="text"]:focus{
-    outline: none;
-}
-input:focus + div#content {
-  display: block;
-}
     </style>
-    <title>Minimal Dashboard</title>
+    <title>Dashboard</title>
 </head>
 <body>
     <header>
-        Minimal Dashboard
+        Dashboard
+    <button id="headbut"><a href="/logout">Logout</a></button>
+
     </header>
     <h2 id="username">Welcome, <i>{{ username }}</i></h2>
 
@@ -83,41 +103,30 @@ input:focus + div#content {
         <div class="card">
             <h2>Joke</h2>
             <ul>
-                <li><a href="/call_external_api">Click for Dad Joke</a></li>
+                <button><a href="/call_external_api">Click for Random Joke</a></button>
+                <button><a href="/welcome">Clear</a></button>
                 {% if setup %}
-                <p>Setup: {{ setup }}</p>
-                <input type="text" value="Punchline">
-                <div id="content">
-                    <p>Punchline: {{ punchline }}</p>
-                </div>
+                    <p><b>Setup:</b> {{ setup }}</p>
+                    <div id="content">
+                        <p><b>Punchline:</b> {{ punchline }}</p>
                 {% endif %}
             </ul>
         </div>
 
         <div class="card">
-            <h2>Weather</h2>
-            <p>Current Temperature: 25°C</p>
-            <p>Forecast: Sunny</p>
+            <h2>Username:{{ username }}</h2>
+            <p>{{ current_date }}</p>
         </div>
     </section>
     <section>
-        <div class="card">
-            <h2>Weatherr</h2>
-            <p>Current Temperature: 25°C</p>
-            <p>Forecast: Sunny</p>
+        <div class="card" id="genteamBut" style="background-color: #fff; border-radius: 8px; padding: 1.5em; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); flex: 1; margin: 0 1em; display: flex; flex-direction: column; align-items: center;">
+            <h2 style="color: #333; border-bottom: 2px solid #333; padding-bottom: 0.5em; margin-bottom: 1em;">Submit Details</h2>
+            <p style="margin-bottom: 1em;">Click the link below to submit your details</p>
+            <button id="urlbut" style="background-color: #28a745; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; margin-top: 1em;"><a href="/gen_team" style="color: white; text-decoration: none;">Submit Details</a></button>
         </div>
-        <div class="card">
-            <h2>Weather</h2>
-            <p>Current Temperature: 25°C</p>
-            <p>Forecast: Sunny</p>
-        </div>
-
     </section>
-
     <footer>
-        © 2024 Minimal Dashboard
+        © 2024 Dashboard
     </footer>
 </body>
-<script>
-</script>
 </html>

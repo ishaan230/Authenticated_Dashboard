@@ -4,14 +4,17 @@ import config
 import certifi
 import requests
 from requests import get
+from datetime import datetime
 
 app = Flask(__name__)
 app.config.from_object(config)
 
 #set up MongoDB
-client = MongoClient(config.MONGO_URI,tlsCAFile=certifi.where())
+client = MongoClient(config.MONGO_URI)
 db = client.gettingStarted
 col = db.usrpass
+perdet = db.people
+current_date = datetime.now().date()
 
 @app.route('/')
 def index():
@@ -51,7 +54,12 @@ def welcome():
     print(session)
     print(type(session))
     if 'username' in session:
-        return render_template('welcome.html', username=session['username'])
+        return render_template('welcome.html', username=session['username'],current_date=current_date)
+    return redirect(url_for('login'))
+
+@app.route('/logout')
+def logout():
+    session.pop('username', None)
     return redirect(url_for('login'))
 
 
@@ -67,8 +75,31 @@ def joke_generator():
     setup = response['setup']
     punchline = (response['punchline'])
     if 'username' in session:
-        return render_template('welcome.html', username=session['username'],setup=setup, punchline=punchline)
+        return render_template('welcome.html', username=session['username'],setup=setup, punchline=punchline,current_date=current_date)
     return "Error"
+
+@app.route('/gen_team')
+def sub_team():
+    if 'username' in session:
+        return render_template('details.html')
+
+@app.route('/form_submit', methods=['GET','POST'])
+def form_submission():
+    if request.method == 'POST':
+        name1 = request.form['name1']
+        name2 = request.form['name2']
+        name3 = request.form['name3']
+        name4 = request.form['name4']
+        perdet.insert_one({'member1': name1,'member2': name2,'member3': name3,'member4': name4})
+        return ("""
+            <h1>Info Submitted!! xD</h1>
+            <script>alert('Info Submited!')</script>
+        """)
+    else:
+        print("Not in if")
+    return render_template('details.html')
+
+
 
 if __name__ == '__main__':
     app.secret_key = 'your_secret_key'
